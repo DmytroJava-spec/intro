@@ -3,10 +3,10 @@ package com.globallogic.basecamp;
 import com.globallogic.basecamp.model.Grade;
 import com.globallogic.basecamp.model.Student;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -31,9 +31,13 @@ public class TrainingUtils {
      * @return list of unique students emails
      */
     public static List<String> getStudentEmailsByCondition(Stream<Training> trainings,
-                                                           Predicate<Student> predicate) {
+                                                           Predicate<Student> predicate){
+    Set<String> result = new HashSet<>();
+        trainings.forEach(a -> a.getStudents().stream().
+    filter(predicate).forEach( student -> {
+        result.add(student.getEmail());}));
 
-        return null;
+        return new ArrayList<String>(result);
     }
 
     /**
@@ -43,9 +47,17 @@ public class TrainingUtils {
      * @return map where keys are student emails and values are List of training names that this student attends
      */
     public static Map<String, List<String>> getTrainingsPerStudent(Stream<Training> trainings) {
-        return null;
+        Map<String, List<String>> result = new HashMap<>();
+        trainings.forEach(training -> {
+            training.getStudents().stream().forEach(
+                    student -> {
+                        result.putIfAbsent(student.getEmail(), new ArrayList<>());
+                        result.get(student.getEmail()).add(training.getName());
+                    }
+            );
+        });
+        return result;
     }
-
     /**
      * For each student from the provided trainings get an average mark. Average mark is calculated as a sum of all
      * marks for both semesters divided by the number of marks
@@ -54,9 +66,38 @@ public class TrainingUtils {
      * @return map where keys are student emails and values are student average mark calculating using both semesters
      */
     public static Map<String, Double> getAverageMarkPerStudent(Stream<Training> trainings) {
-        return null;
+        Map<String, List<Integer>> email = new HashMap<>();
+        trainings.forEach(training -> {
+            training.getStudents().stream().forEach(
+                    student -> {
+                        if (!email.containsKey(student.getEmail())) {
+                            email.put(student.getEmail(), new ArrayList<>());
+                        }
+                        if (training.getStudentGrade(student).isPresent()) {
+                            email
+                                    .get(student.getEmail())
+                                    .add(training
+                                            .getStudentGrade(student)
+                                            .get()
+                                            .getFirstSemester());
+                            email
+                                    .get(student.getEmail())
+                                    .add(training
+                                            .getStudentGrade(student)
+                                            .get()
+                                            .getSecondSemester());
+                        }
+                    }
+            );
+        });
+        return email.entrySet().stream()
+                .collect(Collectors.toMap(
+                        e -> e.getKey(),
+                        e -> e.getValue().stream()
+                                .mapToDouble(a -> a)
+                                .average().getAsDouble())
+                );
     }
-
     /**
      * Perform an action for all grades in the provided trainings
      *
