@@ -33,6 +33,7 @@ public class TrainingUtils {
     public static List<String> getStudentEmailsByCondition(Stream<Training> trainings,
                                                            Predicate<Student> predicate) {
 
+        return null;
     }
 
     /**
@@ -42,7 +43,7 @@ public class TrainingUtils {
      * @return map where keys are student emails and values are List of training names that this student attends
      */
     public static Map<String, List<String>> getTrainingsPerStudent(Stream<Training> trainings) {
-
+        return null;
     }
 
     /**
@@ -53,7 +54,7 @@ public class TrainingUtils {
      * @return map where keys are student emails and values are student average mark calculating using both semesters
      */
     public static Map<String, Double> getAverageMarkPerStudent(Stream<Training> trainings) {
-
+        return null;
     }
 
     /**
@@ -73,7 +74,7 @@ public class TrainingUtils {
      * @return list of students emails
      */
     public static List<String> getStudentsWithMaxMark(Stream<Training> trainings) {
-
+        return null;
     }
 
     /**
@@ -96,7 +97,7 @@ public class TrainingUtils {
      * @return list of sorted
      */
     public static List<String> getStudentsSorted(Stream<Training> trainings) {
-
+        return null;
     }
 
     /**
@@ -108,7 +109,7 @@ public class TrainingUtils {
      * @return list of students' emails
      */
     public static List<String> getStudentsWithMarkLowerThan(Stream<Training> trainings, int mark) {
-
+        return null;
     }
 
     /**
@@ -120,7 +121,7 @@ public class TrainingUtils {
      * @return true if the student attends any training, false otherwise
      */
     public static boolean isStudentPresentOnTrainings(Stream<Training> trainings, Student student) {
-
+        return true;
     }
 
     /**
@@ -131,7 +132,7 @@ public class TrainingUtils {
      * @return map where key is a training name and value is an average mark
      */
     public static Map<String, Double> getAverageMarkPerTraining(Stream<Training> trainings) {
-
+        return null;
     }
 
 }

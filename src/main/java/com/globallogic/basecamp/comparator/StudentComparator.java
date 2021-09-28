@@ -15,11 +15,13 @@ import java.util.Comparator;
      * compare in natural order by the first name
      */
         public int compare(Student a,Student b){
-            return a.getLastName().compareTo(b.getLastName());
+            return a
+                    .getLastName()
+                    .equals(b.getLastName()) ? a
+                    .getFirstName()
+                    .compareTo(b.getFirstName()) : a
+                    .getLastName()
+                    .compareTo(b.getLastName());
         }
 }
-    class StudentFirstNameComparator implements Comparator<Student>{
-    public int compare(Student a, Student b){
-        return a.getFirstName().compareTo(b.getFirstName());
-    }
-}
+
