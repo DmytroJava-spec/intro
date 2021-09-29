@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.Optional;
 
 class GlobalLogicTrainingTest {
 
@@ -195,7 +196,7 @@ class GlobalLogicTrainingTest {
         existingGrade.setSecondSemester(9);
         grades.put(student, existingGrade);
 
-        final var grade = training.getStudentGrade(student);
+        final Optional<Grade> grade = training.getStudentGrade(student);
         Assertions.assertTrue(grade.isPresent());
         Assertions.assertEquals(2, grade.get().getFirstSemester());
         Assertions.assertEquals(9, grade.get().getSecondSemester());
@@ -218,7 +219,7 @@ class GlobalLogicTrainingTest {
         training.addStudent(student);
         training.rateFirstSemester(student, 0);
         training.rateSecondSemester(student, 0);
-        final var grade = training.getStudentGrade(student);
+        final  Optional<Grade> grade = training.getStudentGrade(student);
         Assertions.assertTrue(grade.isPresent());
         Assertions.assertEquals(0, grade.get().getFirstSemester());
         Assertions.assertEquals(0, grade.get().getSecondSemester());

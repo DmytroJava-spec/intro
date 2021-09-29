@@ -47,6 +47,7 @@ public class Filler {
     }
 
     private static List<Student> createStudents() {
+
         final var address1 = Address.builder().setCountry("Country1")
                 .setCity("City1").setStreet("Street1").setHouseNumber(1).build();
         final var address2 = Address.builder().setCountry("Country2")

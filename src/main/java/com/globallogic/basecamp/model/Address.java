@@ -33,7 +33,15 @@ public class Address {
      * TODO: implement getters and other methods if necessary
      */
 
+    /**
+     * Allows to get the builder for the Address
+     *
+     * @return builder
+     */
+    public static Builder builder() {
+        return new Builder();
 
+    }
     /**
      * Allows to get the builder for the Address
      *
@@ -52,11 +60,14 @@ public class Address {
      * <p>
      * TODO: implement the builder functionality
      */
-    static class Builder {
+    public static class Builder {
         private String country;
         private String city;
         private String street;
         private Integer houseNumber;
+        private Builder(){
+
+        }
 
         public Builder(String country, String city, String street, Integer houseNumber) {
             this.country = country;
@@ -85,7 +96,7 @@ public class Address {
             return this;
         }
         public Address build(){
-           return new Address(this);
+            return new Address(this);
         }
     }
-    }
+}

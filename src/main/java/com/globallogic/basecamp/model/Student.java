@@ -1,5 +1,7 @@
 package com.globallogic.basecamp.model;
 
+import com.globallogic.basecamp.model.Address.Builder;
+
 import java.util.Objects;
 
 /**
@@ -28,7 +30,7 @@ public class Student {
      * @return builder
      */
     public Student(String email) {
-        this.email = Builder.email;
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -66,12 +68,17 @@ public class Student {
         return Objects.equals(email, student.email);
     }
 
+    public static Student.Builder builder(String email) {
+        return new Student.Builder(email);
+
+    }
+
     /**
      * TODO: implement hashCode() method for this class using email field
      *
      * @return object hash code
      */
-   @Override
+    @Override
     public int hashCode() {
         return Objects.hash(email);
     }
@@ -82,15 +89,19 @@ public class Student {
      * <p>
      * TODO: implement the builder functionality
      */
-    static class Builder {
-        public static String email;
+    public static class Builder {
+        public  String email;
         public String firstName;
         public String lastName;
         public String phoneNumber;
         public Address address;
 
+        private Builder(String email){
+            this.email = email;
+        }
+
         public Builder(String email, String firstName, String lastName, String phoneNumber, Address address) {
-            Builder.email = email;
+            this.email = email;
             this.firstName = firstName;
             this.lastName = lastName;
             this.phoneNumber = phoneNumber;
@@ -121,6 +132,16 @@ public class Student {
         public Builder setAddress(Address address) {
             this.address = address;
             return this;
+        }
+
+        public Student build() {
+            Student student = new Student(this.email);
+            student.firstName = this.firstName;
+            student.address = this.address;
+            student.lastName = this.lastName;
+            student.phoneNumber = this.phoneNumber;
+            return student;
+
         }
     }
 

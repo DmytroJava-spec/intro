@@ -15,7 +15,7 @@ public class GlobalLogicTraining<name, grades> implements Training {
      * TODO: implement methods of the Training interface and add the necessary functionality
      */
 
-    private String name;
+    private final String name;
 
     private final HashMap<Student, Grade> grades = new HashMap<>();
     private Object Grade;
@@ -23,6 +23,9 @@ public class GlobalLogicTraining<name, grades> implements Training {
 
 
     public GlobalLogicTraining(String name) {
+        if(name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Empty field found");
+        }
         this.name = name;
     }
 
@@ -38,32 +41,41 @@ public class GlobalLogicTraining<name, grades> implements Training {
 
     @Override
     public boolean addStudent(Student student) {
+        if(grades.containsKey(student)){
+            return false;
+        }
         grades.put(student, new Grade());
         return grades.containsKey(student);
     }
 
     @Override
     public boolean removeStudent(Student student) {
+        if(!grades.containsKey(student))
+            return false;
         grades.remove(student);
         return !grades.containsKey(student);
     }
 
     @Override
     public boolean rateFirstSemester(Student student, int mark) {
-        if (grades.containsKey(student)){
-            grades.get(student).setFirstSemester(mark);
-            return true;
+        if (!grades.containsKey(student)){
+           return false;
         }
-        return false;
+        if(Objects.isNull(grades.get(student)))
+            grades.put(student, new Grade());
+        grades.get(student).setFirstSemester(mark);
+        return true;
     }
 
     @Override
     public boolean rateSecondSemester(Student student, int mark) {
-        if (grades.containsKey(student)){
-            grades.get(student).setSecondSemester(mark);
-            return true;
+        if (!grades.containsKey(student)){
+            return false;
         }
-        return false;
+        if(Objects.isNull(grades.get(student)))
+            grades.put(student, new Grade());
+        grades.get(student).setSecondSemester(mark);
+        return true;
     }
 
     @Override
@@ -73,7 +85,7 @@ public class GlobalLogicTraining<name, grades> implements Training {
 
     @Override
     public Optional<Grade> getStudentGrade(Student student) {
-            Optional<Grade> grade = Optional.ofNullable(grades.get(student));
+        Optional<Grade> grade = Optional.ofNullable(grades.get(student));
         return grade;
     }
 
