@@ -237,7 +237,7 @@ class GlobalLogicTrainingTest {
             email.set(student, "amanda.perry@email.com");
             Assertions.assertTrue(grades.containsKey(student));
         } catch (ReflectiveOperationException e) {
-            // NOP
+            //
         }
     }
 

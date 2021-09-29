@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class Student {
 
-    public String email;
+    public final String email;
 
     public String firstName;
 

@@ -58,17 +58,24 @@ public class GlobalLogicTraining<name, grades> implements Training {
 
     @Override
     public boolean rateFirstSemester(Student student, int mark) {
+        if (mark < 0 || mark >10) {
+            throw new IllegalArgumentException("wrong mark");
+        }
         if (!grades.containsKey(student)){
            return false;
         }
         if(Objects.isNull(grades.get(student)))
             grades.put(student, new Grade());
         grades.get(student).setFirstSemester(mark);
+
         return true;
     }
 
     @Override
     public boolean rateSecondSemester(Student student, int mark) {
+        if (mark < 0 || mark >10) {
+            throw new IllegalArgumentException("wrong mark");
+        }
         if (!grades.containsKey(student)){
             return false;
         }
