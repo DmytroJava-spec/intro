@@ -9,7 +9,7 @@ import java.util.*;
  * GlobalLogicTraining is an implementation of the {@link com.globallogic.basecamp.Training Training} interface.
  * Contains the training name and student grades.
  */
-public class GlobalLogicTraining<name, grades> implements Training {
+public class GlobalLogicTraining implements Training {
 
     /**
      * TODO: implement methods of the Training interface and add the necessary functionality
