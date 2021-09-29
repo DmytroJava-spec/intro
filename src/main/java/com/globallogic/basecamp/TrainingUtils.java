@@ -47,12 +47,10 @@ public class TrainingUtils {
      */
     public static List<String> getStudentEmailsByCondition(Stream<Training> trainings,
                                                            Predicate<Student> predicate) {
-
         Set<String> result = new HashSet<>();
         trainings.forEach(a -> a.getStudents().stream().
             filter(predicate).forEach( student -> {
                 result.add(student.getEmail());}));
-
         return new ArrayList<String>(result);
     }
 
@@ -125,7 +123,8 @@ public class TrainingUtils {
      */
     public static void forEachGrade(Stream<Training> trainings, Consumer<Grade> action) {
         trainings.forEach(training ->
-            training.getStudents().stream().forEach(student -> training.getStudentGrade(student).stream().forEach(action)));
+            training.getStudents().stream().forEach(student ->
+                    training.getStudentGrade(student).stream().forEach(action)));
     }
 
     /**
@@ -139,19 +138,15 @@ public class TrainingUtils {
         class CustomPair {
             private Integer key;
             private Set<String> value;
-
             public Integer getKey() {
                 return key;
             }
-
             public void setKey(Integer key) {
                 this.key = key;
             }
-
             public Set<String> getValue() {
                 return value;
             }
-
             public void setValue(Set<String> value) {
                 this.value = value;
             }
@@ -178,7 +173,7 @@ public class TrainingUtils {
                 }
             });
         });
-return max.getValue().stream().collect(Collectors.toList());
+        return max.getValue().stream().collect(Collectors.toList());
     }
 
     /**
@@ -207,7 +202,7 @@ return max.getValue().stream().collect(Collectors.toList());
         Set<Student> students = new HashSet<>();
         trainings.forEach(training ->students.addAll(training.getStudents()));
         return students.stream().sorted(new StudentComparator()).map(student -> {
-          return  student.getFirstName().concat(" ").concat(student.getLastName());
+          return   student.getFirstName().concat(" ").concat(student.getLastName());
         }).collect(toList());
     }
 
@@ -231,7 +226,6 @@ return max.getValue().stream().collect(Collectors.toList());
             });
         });
         return students.stream().collect(Collectors.toList());
-
     }
 
     /**

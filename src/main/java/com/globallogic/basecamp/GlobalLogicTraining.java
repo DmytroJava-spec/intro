@@ -18,9 +18,6 @@ public class GlobalLogicTraining<name, grades> implements Training {
     private final String name;
 
     private final HashMap<Student, Grade> grades = new HashMap<>();
-    private Object Grade;
-    private Object Student;
-
 
     public GlobalLogicTraining(String name) {
         if(name == null || name.isBlank()) {
@@ -41,9 +38,7 @@ public class GlobalLogicTraining<name, grades> implements Training {
 
     @Override
     public boolean addStudent(Student student) {
-        if(grades.containsKey(student)){
-            return false;
-        }
+        if(grades.containsKey(student))return false;
         grades.put(student, new Grade());
         return grades.containsKey(student);
     }
@@ -58,27 +53,19 @@ public class GlobalLogicTraining<name, grades> implements Training {
 
     @Override
     public boolean rateFirstSemester(Student student, int mark) {
-        if (mark < 0 || mark >10) {
-            throw new IllegalArgumentException("wrong mark");
-        }
-        if (!grades.containsKey(student)){
-           return false;
-        }
+        if (mark < 0 || mark >10) throw new IllegalArgumentException("wrong mark");
+        if (!grades.containsKey(student)) return false;
         if(Objects.isNull(grades.get(student)))
             grades.put(student, new Grade());
         grades.get(student).setFirstSemester(mark);
-
         return true;
     }
 
     @Override
     public boolean rateSecondSemester(Student student, int mark) {
-        if (mark < 0 || mark >10) {
-            throw new IllegalArgumentException("wrong mark");
-        }
-        if (!grades.containsKey(student)){
-            return false;
-        }
+        if (mark < 0 || mark >10) throw new IllegalArgumentException("wrong mark");
+
+        if (!grades.containsKey(student)) return false;
         if(Objects.isNull(grades.get(student)))
             grades.put(student, new Grade());
         grades.get(student).setSecondSemester(mark);
