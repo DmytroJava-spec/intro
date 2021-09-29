@@ -7,7 +7,7 @@ import java.util.Comparator;
 /**
  * Custom comparator for the {@link com.globallogic.basecamp.model.Student Student} class
  */
-    class StudentSecondNameComparator implements Comparator<Student> {
+   public class StudentComparator implements Comparator<Student> {
 
     /**
      * TODO: implement `compare` method of the Comparator interface
